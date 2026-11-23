@@ -7,6 +7,4 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   base: './',
   plugins: [react(), tailwindcss()],
-  // React + Motion make one ~500 kB (160 kB gzip) bundle; that is expected here.
-  build: { chunkSizeWarningLimit: 700 },
 })

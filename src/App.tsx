@@ -1,21 +1,52 @@
-import { MotionConfig, motion, useScroll, useSpring } from 'motion/react'
-import { Bento } from './components/Bento'
-import { Nav } from './components/Nav'
-import { ProjectModalProvider, Projects } from './components/Projects'
-import { Contact, Research, Skills, Team, Timeline } from './components/Sections'
-import { TrajectoryCanvas } from './components/TrajectoryCanvas'
-import { LangProvider } from './lib/i18n'
+import { useEffect, useState } from 'react'
+import { Spotlight } from './components/bits'
+import { Header, type Tab } from './components/Header'
+import { LangProvider, ui, useLang } from './lib/i18n'
 import { ThemeProvider } from './lib/theme'
+import { About } from './pages/About'
+import { ProjectsPage } from './pages/Projects'
 
-function ScrollProgress() {
-  const { scrollYProgress } = useScroll()
-  const scaleX = useSpring(scrollYProgress, { stiffness: 140, damping: 30, restDelta: 0.001 })
+/** Two tabs, kept in the URL hash: #about (default) and #projects. */
+function useTab(): Tab {
+  const read = (): Tab => (location.hash === '#projects' ? 'projects' : 'about')
+  const [tab, setTab] = useState<Tab>(read)
+  useEffect(() => {
+    const onHash = () => {
+      setTab(read())
+      window.scrollTo({ top: 0 })
+    }
+    window.addEventListener('hashchange', onHash)
+    return () => window.removeEventListener('hashchange', onHash)
+  }, [])
+  return tab
+}
+
+function Footer() {
+  const { t } = useLang()
   return (
-    <motion.div
-      aria-hidden
-      style={{ scaleX }}
-      className="fixed inset-x-0 top-0 z-50 h-[3px] origin-left bg-gradient-to-r from-accent to-accent-2"
-    />
+    <footer className="mx-auto mt-24 max-w-[720px] px-6 pb-12">
+      <div className="flex items-center justify-between gap-4 border-t border-line pt-6 text-sm text-faint">
+        <span>© 2026 Joshua (Sung Hyun) Kim</span>
+        <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="link">
+          {t(ui.backToTop)} ↑
+        </button>
+      </div>
+    </footer>
+  )
+}
+
+function Shell() {
+  const tab = useTab()
+  return (
+    <>
+      <Spotlight />
+      <Header tab={tab} />
+      <main className="mx-auto max-w-[720px] px-6">
+        {/* keyed so the page's quiet fade-in replays on every tab switch */}
+        <div key={tab}>{tab === 'about' ? <About /> : <ProjectsPage />}</div>
+      </main>
+      <Footer />
+    </>
   )
 }
 
@@ -23,22 +54,7 @@ export default function App() {
   return (
     <ThemeProvider>
       <LangProvider>
-        <MotionConfig reducedMotion="user">
-          <ProjectModalProvider>
-            <TrajectoryCanvas />
-            <ScrollProgress />
-            <Nav />
-            <main>
-              <Bento />
-              <Projects />
-              <Research />
-              <Timeline />
-              <Team />
-              <Skills />
-            </main>
-            <Contact />
-          </ProjectModalProvider>
-        </MotionConfig>
+        <Shell />
       </LangProvider>
     </ThemeProvider>
   )

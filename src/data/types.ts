@@ -1,53 +1,35 @@
 /** Every piece of visible text exists in English and Korean. */
 export type Text = { en: string; ko: string }
 
-export type Category = 'rl' | 'agents' | 'ml' | 'apps'
+export type LinkKind = 'demo' | 'video' | 'code'
 
-export type LinkKind = 'repo' | 'demo' | 'video' | 'pr' | 'page'
+export type ProjectLink = { kind: LinkKind; href: string }
 
-export type ProjectLink = { kind: LinkKind; label: Text; href: string }
-
-export type Award = {
-  /** Short form used on badges, e.g. "5th Place · Meta AI Hackathon". */
-  short: Text
-  title: Text
-  event: Text
-  date: Text
-  href?: string
-  /** 'place' shows a numbered medal, 'star' a star medal. */
-  medal: 'place' | 'star'
-  place?: number
-}
-
-/** Hand-drawn animated thumbnails for projects without a screenshot. */
+/** Drawn thumbnails for projects without a public screenshot. */
 export type Art = 'orbit' | 'fly' | 'traffic' | 'ev' | 'moa'
 
 export type Project = {
   id: string
   title: string
-  subtitle: Text
+  /** e.g. "Oct – Nov 2026" */
   period: Text
-  role: Text
+  /** e.g. "Solo · Hackathon" */
+  context: Text
+  /** One or two sentences. */
   summary: Text
-  bullets: Text[]
-  metric: { value: Text; label: Text }
   tech: string[]
-  categories: Category[]
   image?: string
   art?: Art
   links: ProjectLink[]
-  award?: Award
-  /** Shown instead of a repository link when the code is private. */
-  privateNote?: Text
-  featured?: boolean
+  /** Short award line, shown as a small tag. */
+  award?: Text
+  privateCode?: boolean
 }
 
-export type TimelineKind = 'award' | 'research' | 'project' | 'education' | 'team' | 'program'
-
-export type TimelineItem = {
-  date: Text
-  kind: TimelineKind
+/** A row in Awards / Experience / Education. */
+export type Entry = {
   title: Text
-  detail: Text
-  href?: string
+  org: Text
+  date: Text
+  detail?: Text
 }

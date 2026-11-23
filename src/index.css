@@ -5,76 +5,60 @@
 @theme {
   --font-sans: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, 'Segoe UI',
     'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
-  --font-mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
 
+  --color-bg: var(--bg);
   --color-ink: var(--ink);
-  --color-ink-soft: var(--ink-soft);
-  --color-ink-faint: var(--ink-faint);
-  --color-surface: var(--surface);
-  --color-surface-strong: var(--surface-strong);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
   --color-line: var(--line);
+  --color-soft: var(--soft);
   --color-accent: var(--accent);
-  --color-accent-2: var(--accent-2);
   --color-gold: var(--gold);
-  --color-gold-ink: var(--gold-ink);
-
-  --animate-shimmer: shimmer 3.6s ease-in-out infinite;
-  --animate-twinkle: twinkle 2.4s ease-in-out infinite;
-  --animate-blink: blink 1s steps(1) infinite;
-  --animate-pulse-ring: pulse-ring 2s ease-out infinite;
-  --animate-marquee: marquee 40s linear infinite;
+  --color-gold-bg: var(--gold-bg);
 }
 
-/* ---------- color tokens ---------- */
 :root {
-  --bg: #f6f7fb;
-  --ink: #0f172a;
-  --ink-soft: #475569;
-  --ink-faint: #8391a7;
-  --surface: rgb(255 255 255 / 0.72);
-  --surface-strong: #ffffff;
-  --line: rgb(15 23 42 / 0.09);
-  --accent: #0891b2;
-  --accent-2: #7c3aed;
-  --gold: #d99a1c;
-  --gold-ink: #7a4a00;
-  --spot: rgb(8 145 178 / 0.1);
-  --grid-dot: rgb(15 23 42 / 0.07);
+  --bg: #fbfbfa;
+  --ink: #18181b;
+  --muted: #5f5f68;
+  --faint: #9a9aa3;
+  --line: #e7e6e3;
+  --soft: #f2f1ee;
+  --accent: #2563eb;
+  --gold: #a16207;
+  --gold-bg: #fdf3d7;
+  --spot: rgb(37 99 235 / 0.05);
   color-scheme: light;
 }
 
 .dark {
-  --bg: #0a0d14;
-  --ink: #e8edf5;
-  --ink-soft: #a3b0c2;
-  --ink-faint: #66748a;
-  --surface: rgb(17 22 33 / 0.66);
-  --surface-strong: #121826;
-  --line: rgb(255 255 255 / 0.08);
-  --accent: #22d3ee;
-  --accent-2: #a78bfa;
-  --gold: #f5c451;
-  --gold-ink: #fde68a;
-  --spot: rgb(34 211 238 / 0.09);
-  --grid-dot: rgb(255 255 255 / 0.05);
+  --bg: #0c0c0e;
+  --ink: #ececee;
+  --muted: #a3a3ad;
+  --faint: #6b6b75;
+  --line: #24242a;
+  --soft: #16161a;
+  --accent: #7aa7ff;
+  --gold: #f2c35b;
+  --gold-bg: rgb(242 195 91 / 0.1);
+  --spot: rgb(122 167 255 / 0.06);
   color-scheme: dark;
 }
 
 @layer base {
   html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
   }
 
   body {
-    background-color: var(--bg);
-    background-image: radial-gradient(var(--grid-dot) 1px, transparent 1px);
-    background-size: 28px 28px;
+    background: var(--bg);
     color: var(--ink);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-    transition: background-color 0.4s ease, color 0.4s ease;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
   }
 
   /* keep Korean words whole when lines wrap */
@@ -84,245 +68,51 @@
   }
 
   ::selection {
-    background: color-mix(in srgb, var(--accent) 30%, transparent);
+    background: color-mix(in srgb, var(--accent) 22%, transparent);
   }
 
   :focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 3px;
-    border-radius: 6px;
+    border-radius: 4px;
   }
 }
 
-@property --award-angle {
-  syntax: '<angle>';
-  initial-value: 0deg;
-  inherits: false;
-}
-
-@keyframes award-spin {
-  to {
-    --award-angle: 360deg;
-  }
-}
-
-@keyframes shimmer {
-  0%,
-  55% {
-    transform: translateX(-130%);
-  }
-  100% {
-    transform: translateX(130%);
-  }
-}
-
-@keyframes twinkle {
-  0%,
-  100% {
-    opacity: 0.15;
-    transform: scale(0.6) rotate(0deg);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1) rotate(45deg);
-  }
-}
-
-@keyframes blink {
-  50% {
-    opacity: 0;
-  }
-}
-
-@keyframes pulse-ring {
-  0% {
-    transform: scale(1);
-    opacity: 0.7;
-  }
-  100% {
-    transform: scale(2.6);
-    opacity: 0;
-  }
-}
-
-@keyframes marquee {
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-/* component classes live in a layer so Tailwind utilities can override them */
 @layer components {
-  /* ---------- cards ---------- */
-
-  .card {
-    position: relative;
-    isolation: isolate;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 1.25rem;
-    backdrop-filter: blur(14px) saturate(140%);
-    -webkit-backdrop-filter: blur(14px) saturate(140%);
-    box-shadow: 0 1px 0 rgb(255 255 255 / 0.04) inset, 0 10px 30px -18px rgb(2 6 23 / 0.35);
+  /* faint light that follows the cursor (desktop only) */
+  .spotlight {
+    background: radial-gradient(640px circle at var(--x, 50%) var(--y, 0%), var(--spot), transparent 70%);
   }
 
-  /* mouse-following spotlight (coordinates set from JS as --mx / --my) */
-
-  .card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    border-radius: inherit;
-    background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), var(--spot), transparent 45%);
-    opacity: 0;
-    transition: opacity 0.35s ease;
-    pointer-events: none;
+  .link {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
   }
-
-  .card:hover::before {
-    opacity: 1;
-  }
-
-  /* ---------- awards ---------- */
-
-  /* rotating gold border for award cards */
-
-  .award-ring {
-    position: absolute;
-    inset: 0;
-    z-index: 4;
-    border-radius: inherit;
-    padding: 1.5px;
-    background: conic-gradient(
-      from var(--award-angle),
-      #f59e0b,
-      #fde68a 15%,
-      #b45309 30%,
-      #fcd34d 50%,
-      #f59e0b 65%,
-      #fff7d6 80%,
-      #f59e0b
-    );
-    -webkit-mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    animation: award-spin 6s linear infinite;
-    pointer-events: none;
-  }
-
-  /* soft golden glow behind award cards */
-
-  .award-glow {
-    box-shadow:
-      0 0 0 1px rgb(245 158 11 / 0.15),
-      0 18px 50px -20px rgb(245 158 11 / 0.55);
-  }
-
-  /* gold pill badge with a light sweep */
-
-  .award-badge {
-    position: relative;
-    overflow: hidden;
-    isolation: isolate;
-    color: #4a2c00;
-    background: linear-gradient(135deg, #fff1b8 0%, #fcd34d 35%, #f59e0b 60%, #fde68a 100%);
-    box-shadow:
-      0 0 0 1px rgb(255 255 255 / 0.45) inset,
-      0 6px 18px -8px rgb(217 119 6 / 0.8);
-  }
-
-  .award-badge::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 0.85) 50%, transparent 70%);
-    transform: translateX(-130%);
-    animation: shimmer 3.6s ease-in-out infinite;
-    pointer-events: none;
-  }
-
-  /* corner ribbon on award project cards */
-
-  .award-ribbon {
-    position: absolute;
-    top: 18px;
-    right: -34px;
-    z-index: 5;
-    width: 140px;
-    transform: rotate(45deg);
-    text-align: center;
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 0.14em;
-    padding: 4px 0;
-    color: #4a2c00;
-    background: linear-gradient(90deg, #f59e0b, #fde68a, #f59e0b);
-    box-shadow: 0 4px 12px -4px rgb(180 83 9 / 0.7);
-  }
-
-  /* ---------- small helpers ---------- */
-
-  .label {
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-  }
-
-  .chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    border-radius: 999px;
-    border: 1px solid var(--line);
-    background: color-mix(in srgb, var(--surface-strong) 70%, transparent);
-    padding: 0.2rem 0.6rem;
-    font-size: 0.72rem;
-    font-weight: 500;
-    color: var(--ink-soft);
-    white-space: nowrap;
-  }
-
-  .text-gradient {
-    background: linear-gradient(100deg, var(--accent), var(--accent-2));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
-  .gold-text {
-    background: linear-gradient(100deg, #b45309, #f59e0b 40%, #fcd34d 60%, #d97706);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
-  .dark .gold-text {
-    background: linear-gradient(100deg, #fde68a, #f5c451 40%, #fff1b8 60%, #f59e0b);
-    -webkit-background-clip: text;
-    background-clip: text;
-  }
-
-  .marquee-mask {
-    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  .link:hover {
+    color: var(--ink);
   }
 }
 
-/* respect reduced-motion everywhere */
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
+/* the only entrance animation: a quiet opacity fade (no movement) */
+@keyframes fade-in {
+  from {
+    opacity: 0;
   }
+  to {
+    opacity: 1;
+  }
+}
+.fade-in {
+  animation: fade-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--d, 0ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
     animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
 }

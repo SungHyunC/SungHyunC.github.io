@@ -1,10 +1,9 @@
 import { useId } from 'react'
-import { useReducedMotion } from 'motion/react'
 import type { Art } from '../data/types'
 
-/** Animated SVG thumbnails for projects that have no public screenshot. */
-export function ProjectArt({ art }: { art: Art }) {
-  const still = !!useReducedMotion()
+/** Drawn SVG thumbnails for projects without a public screenshot (static unless `animate`). */
+export function ProjectArt({ art, animate = false }: { art: Art; animate?: boolean }) {
+  const still = !animate || window.matchMedia('(prefers-reduced-motion: reduce)').matches
   const u = useId().replace(/:/g, '')
   const props = { u, still }
   return (
