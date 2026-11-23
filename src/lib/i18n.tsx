@@ -84,5 +84,11 @@ export const ui = {
     code: { en: 'Code', ko: '코드' },
   },
   privateCode: { en: 'Private code', ko: '비공개 코드' },
+  details: { en: 'Details', ko: '자세히' },
+  close: { en: 'Close', ko: '닫기' },
+  statProjects: { en: 'projects', ko: '프로젝트' },
+  statAwards: { en: 'awards', ko: '수상' },
+  statDemos: { en: 'live demos', ko: '라이브 데모' },
+  awardLabel: { en: 'Award', ko: '수상' },
   backToTop: { en: 'Back to top', ko: '맨 위로' },
 }

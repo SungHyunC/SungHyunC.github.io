@@ -3,10 +3,11 @@ import type { Entry, Text } from './types'
 export const profile = {
   name: { en: 'Joshua Kim', ko: '김성현' } as Text,
   altName: { en: 'Sung Hyun Kim · 김성현', ko: 'Joshua (Sung Hyun) Kim' } as Text,
+  /** [before, highlighted, after]: the middle part is drawn with the accent gradient. */
   lead: {
-    en: 'Software engineer working on reinforcement learning, simulation and applied AI.',
-    ko: '강화학습, 시뮬레이션, 응용 AI를 다루는 소프트웨어 엔지니어입니다.',
-  } as Text,
+    en: ['Software engineer working on ', 'reinforcement learning, simulation and applied AI', '.'],
+    ko: ['', '강화학습, 시뮬레이션, 응용 AI', '를 다루는 소프트웨어 엔지니어입니다.'],
+  } as Record<'en' | 'ko', [string, string, string]>,
   available: { en: 'Available from January 2027', ko: '2027년 1월부터 근무 가능' } as Text,
   citizenship: { en: 'U.S. citizen', ko: '미국 시민권자' } as Text,
   location: { en: 'Sejong, South Korea', ko: '대한민국 세종' } as Text,
@@ -17,8 +18,22 @@ export const profile = {
   email: 'honeybeelawn@gmail.com',
   github: 'https://github.com/SungHyunC',
   linkedin: 'https://www.linkedin.com/in/joshua-austin-kim',
-  /** Optional: put resume.pdf in /public and write 'resume.pdf' here. Empty = hidden. */
+  /** Files in /public. Empty strings hide them. */
+  photo: 'profile.jpg',
   resume: '',
+}
+
+/** Verified on the event page / README: $1M total prizes, 2 tracks, 5,367 projects submitted, $25K for 5th (Indie). */
+export const metaHighlight = {
+  chip: { en: '5th Place · Meta Global AI Hackathon', ko: 'Meta 글로벌 AI 해커톤 5위' } as Text,
+  place: { en: '5th Place', ko: '5위 입상' } as Text,
+  track: { en: 'Indie Developer Track', ko: '인디 개발자 트랙' } as Text,
+  href: 'https://cerebralvalley.ai/e/meta-ai-developer-hackathon/hackathon/gallery/2050',
+  stats: [
+    { to: 5367, prefix: '', suffix: '', label: { en: 'projects submitted', ko: '전체 출품작' } as Text },
+    { to: 1, prefix: '$', suffix: 'M', label: { en: 'total prize pool', ko: '총상금' } as Text },
+    { to: 25, prefix: '$', suffix: 'K', label: { en: 'prize won', ko: '수상 상금' } as Text },
+  ],
 }
 
 export const awards: Entry[] = [
@@ -26,7 +41,7 @@ export const awards: Entry[] = [
     title: { en: '5th Place, Indie Developer Track ($25,000)', ko: '인디 개발자 트랙 5위 (상금 $25,000)' },
     org: { en: 'Meta Global AI Developer Hackathon', ko: 'Meta 글로벌 AI 개발자 해커톤' },
     date: { en: 'Nov 2026', ko: '2026년 11월' },
-    detail: { en: 'Video2URDF (solo) · 5,367 entries', ko: 'Video2URDF 1인 개발 · 출품작 5,367개' },
+    detail: { en: 'Video2URDF, built solo', ko: 'Video2URDF 1인 개발' },
   },
   {
     title: { en: 'Excellence Award', ko: '우수상' },
@@ -68,9 +83,13 @@ export const education: Entry[] = [
   },
 ]
 
-export const skills: { group: Text; items: string }[] = [
-  { group: { en: 'Languages', ko: '언어' }, items: 'Python, JavaScript, Kotlin, Swift, SQL' },
-  { group: { en: 'ML & RL', ko: 'ML · 강화학습' }, items: 'PyTorch, JAX, Ray RLlib, scikit-learn, QLoRA' },
-  { group: { en: 'Simulation', ko: '시뮬레이션' }, items: 'JSBSim, MuJoCo, SUMO, Blender, Unreal Engine 5' },
-  { group: { en: 'AI & Web', ko: 'AI · 웹' }, items: 'LangGraph, Ollama, React, Next.js, Three.js, FastAPI' },
+export type SkillGroup = { id: 'lang' | 'ml' | 'sim' | 'ai' | 'web' | 'tools'; group: Text; items: string[] }
+
+export const skills: SkillGroup[] = [
+  { id: 'lang', group: { en: 'Languages', ko: '언어' }, items: ['Python', 'JavaScript', 'Kotlin', 'Swift', 'SQL'] },
+  { id: 'ml', group: { en: 'ML & RL', ko: 'ML · 강화학습' }, items: ['PyTorch', 'JAX', 'Ray RLlib', 'scikit-learn', 'QLoRA'] },
+  { id: 'sim', group: { en: 'Simulation', ko: '시뮬레이션' }, items: ['JSBSim', 'MuJoCo', 'SUMO', 'Blender', 'Unreal Engine 5'] },
+  { id: 'ai', group: { en: 'AI agents & LLMs', ko: 'AI 에이전트 · LLM' }, items: ['LangGraph', 'Ollama', 'Gemini', 'SAM 3.1'] },
+  { id: 'web', group: { en: 'Web & apps', ko: '웹 · 앱' }, items: ['React', 'Next.js', 'Three.js', 'FastAPI', 'Streamlit', 'Android'] },
+  { id: 'tools', group: { en: 'Tools', ko: '도구' }, items: ['Git', 'GitHub Actions', 'GitHub Pages', 'Cloudflare'] },
 ]
