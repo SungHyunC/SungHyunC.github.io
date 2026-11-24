@@ -118,7 +118,7 @@ export const projects: Project[] = [
       value: { en: '3 gates', ko: '3중 게이트' },
       label: { en: 'rights, privacy and quality, with separation of duties', ko: '권리·개인정보·품질, 직무 분리' },
     },
-    tech: ['Python', 'PyTorch', 'YOLO', 'OpenCV', 'FastAPI', 'ffmpeg'],
+    tech: ['Python', 'PyTorch', 'YOLO', 'OpenCV', 'FastAPI', 'FFmpeg'],
     categories: ['ml', 'apps'],
     art: 'mine',
     links: [],

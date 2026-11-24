@@ -139,11 +139,24 @@ export const education: Entry[] = [
 
 export type SkillGroup = { id: 'lang' | 'ml' | 'sim' | 'ai' | 'web' | 'tools'; group: Text; items: string[] }
 
+/** The same rows and order as the Tech stack section of the GitHub profile README. */
 export const skills: SkillGroup[] = [
-  { id: 'lang', group: { en: 'Languages', ko: '언어' }, items: ['Python', 'JavaScript', 'Kotlin', 'Swift', 'SQL'] },
-  { id: 'ml', group: { en: 'ML & RL', ko: 'ML · 강화학습' }, items: ['PyTorch', 'JAX', 'Ray RLlib', 'scikit-learn', 'QLoRA'] },
-  { id: 'sim', group: { en: 'Simulation', ko: '시뮬레이션' }, items: ['JSBSim', 'MuJoCo', 'Isaac Gym', 'SUMO', 'Blender', 'Unreal Engine 5'] },
-  { id: 'ai', group: { en: 'AI agents & LLMs', ko: 'AI 에이전트 · LLM' }, items: ['LangGraph', 'Ollama', 'Gemini', 'SAM 3.1'] },
-  { id: 'web', group: { en: 'Web & apps', ko: '웹 · 앱' }, items: ['React', 'Next.js', 'Three.js', 'FastAPI', 'Streamlit', 'Android'] },
-  { id: 'tools', group: { en: 'Tools', ko: '도구' }, items: ['Git', 'GitHub Actions', 'GitHub Pages', 'Cloudflare'] },
+  { id: 'lang', group: { en: 'Languages', ko: '언어' }, items: ['Python', 'TypeScript', 'JavaScript', 'Kotlin', 'Swift', 'C#', 'SQL'] },
+  { id: 'ml', group: { en: 'ML & RL', ko: 'ML · 강화학습' }, items: ['PyTorch', 'JAX', 'Ray RLlib', 'scikit-learn', 'QLoRA', 'YOLO', 'OpenCV'] },
+  {
+    id: 'sim',
+    group: { en: 'Simulation & 3D', ko: '시뮬레이션 · 3D' },
+    items: ['JSBSim', 'MuJoCo', 'SUMO', 'Isaac Gym', 'Blender', 'Unreal Engine 5', 'Unity'],
+  },
+  { id: 'ai', group: { en: 'AI agents & LLMs', ko: 'AI 에이전트 · LLM' }, items: ['LangGraph', 'Ollama', 'Gemini', 'SAM 3.1', 'Muse Spark', 'MCP', 'Kiro'] },
+  {
+    id: 'web',
+    group: { en: 'Web & apps', ko: '웹 · 앱' },
+    items: ['React', 'Next.js', 'Three.js', 'FastAPI', 'Streamlit', 'Node.js', 'Leaflet', 'Android'],
+  },
+  {
+    id: 'tools',
+    group: { en: 'Tools', ko: '도구' },
+    items: ['Git', 'GitHub Actions', 'GitHub Pages', 'Docker', 'Vite', 'Cloudflare', 'FFmpeg'],
+  },
 ]
