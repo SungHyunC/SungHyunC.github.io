@@ -53,4 +53,6 @@ export type Entry = {
   org: Text
   date: Text
   detail?: Text
+  /** Opens the organization's site in a new tab. */
+  href?: string
 }

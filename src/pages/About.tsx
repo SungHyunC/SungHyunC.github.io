@@ -1,6 +1,7 @@
 import { useState, type ComponentType } from 'react'
 import {
   ArrowRight,
+  ArrowUpRight,
   BadgeCheck,
   Bot,
   Boxes,
@@ -14,7 +15,6 @@ import {
   Layers,
   LayoutGrid,
   Mail,
-  MapPin,
   Medal,
   Trophy,
   Wrench,
@@ -68,10 +68,6 @@ function Hero() {
         <li className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border border-line bg-surface px-3 py-1 text-muted">
           <BadgeCheck className="size-4 text-accent" aria-hidden />
           {t(profile.citizenship)}
-        </li>
-        <li className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border border-line bg-surface px-3 py-1 text-muted">
-          <MapPin className="size-4 text-accent" aria-hidden />
-          {t(profile.location)}
         </li>
       </ul>
 
@@ -188,7 +184,21 @@ function Experience() {
             </span>
             <p className="text-xs font-semibold text-accent">{t(e.date)}</p>
             <h3 className="mt-1 font-bold leading-snug">{t(e.title)}</h3>
-            <p className="text-sm text-faint text-balance">{t(e.org)}</p>
+            <p className="text-sm text-faint text-balance">
+              {e.href ? (
+                <a
+                  href={e.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="link inline-flex items-center gap-0.5 underline decoration-line underline-offset-4 hover:decoration-current"
+                >
+                  {t(e.org)}
+                  <ArrowUpRight className="size-3.5" aria-hidden />
+                </a>
+              ) : (
+                t(e.org)
+              )}
+            </p>
             {e.detail && (
               <p
                 className={`mt-2 text-[15px] leading-relaxed text-muted ${

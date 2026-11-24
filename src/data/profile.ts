@@ -10,7 +10,6 @@ export const profile = {
   } as Record<'en' | 'ko', [string, string, string]>,
   available: { en: 'Available from January 2027', ko: '2027년 1월부터 근무 가능' } as Text,
   citizenship: { en: 'U.S. citizen', ko: '미국 시민권자' } as Text,
-  location: { en: 'Sejong, South Korea', ko: '대한민국 세종' } as Text,
   bio: {
     en: 'My projects span machine learning pipelines, AI agent workflows and practical web applications. I enjoy turning a problem into a working tool, then making its behavior and limitations easy to understand.',
     ko: '머신러닝 파이프라인, AI 에이전트 워크플로, 실용적인 웹 애플리케이션을 만듭니다. 문제를 실제로 동작하는 도구로 바꾸고, 그 동작과 한계를 이해하기 쉽게 보여 주는 일을 좋아합니다.',
@@ -57,7 +56,8 @@ export const awards: Entry[] = [
 export const experience: Entry[] = [
   {
     title: { en: 'Undergraduate Research Assistant', ko: '학부연구생' },
-    org: { en: 'Korea University', ko: '고려대학교' },
+    org: { en: 'IDS Lab, Korea University', ko: '고려대학교 IDS 연구실' },
+    href: 'https://ids-ku.github.io/',
     date: { en: 'Sep 2025 – Present', ko: '2025년 9월 – 현재' },
     detail: {
       en: 'Multi-agent reinforcement learning for air combat. Ported JSBSim flight dynamics to JAX, cutting per-policy training from about 190 CPU hours to about 20 GPU hours, and reproduced an IEEE ICA 2025 MARL paper over 10 seeds.',
