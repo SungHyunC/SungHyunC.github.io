@@ -106,7 +106,7 @@ function Hero() {
 
 function Awards() {
   const { t } = useLang()
-  const [meta, capstone] = awards
+  const [meta, ...others] = awards
   return (
     <section style={fade(5)} className="fade-in mt-16">
       <SectionTitle icon={Trophy} title={ui.awards} />
@@ -129,12 +129,12 @@ function Awards() {
                 <span className="text-gold-gradient">{t(metaHighlight.place)}</span>
                 <span className="sr-only"> · {t(meta.title)}</span>
               </h3>
-              <p className="text-sm font-semibold">{t(metaHighlight.track)}</p>
+              <p className="text-sm font-semibold text-balance">{t(metaHighlight.track)}</p>
               <p className="mt-1 text-sm text-muted text-balance">{t(meta.org)}</p>
               {meta.detail && <p className="mt-0.5 text-xs text-faint">{t(meta.detail)}</p>}
             </div>
           </div>
-          <div className="mt-5 grid grid-cols-3 gap-2">
+          <div className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-4">
             {metaHighlight.stats.map((s) => (
               <div key={s.label.en} className="rounded-xl border border-amber-400/25 bg-amber-300/10 px-2 py-2.5 text-center">
                 <CountUp to={s.to} prefix={s.prefix} suffix={s.suffix} className="text-lg font-extrabold text-gold sm:text-xl" />
@@ -142,27 +142,34 @@ function Awards() {
               </div>
             ))}
           </div>
+          <p className="mt-2.5 text-[11px] text-faint text-balance">{t(metaHighlight.source)}</p>
         </Card>
 
-        <Card
-          whileHover={{ y: -4 }}
-          transition={{ type: 'spring', stiffness: 320, damping: 24 }}
-          className="award-glow overflow-hidden p-5"
-        >
-          <AwardRing />
-          <div className="absolute inset-0 -z-10 bg-gradient-to-br from-amber-200/30 via-transparent to-transparent dark:from-amber-400/8" />
-          <div className="flex items-start gap-3.5">
-            <span className="grid size-11 shrink-0 place-items-center rounded-full bg-gradient-to-br from-amber-200 via-amber-400 to-amber-600 text-amber-950 shadow-md shadow-amber-500/30">
-              <Medal className="size-5" />
-            </span>
-            <div className="min-w-0">
-              <p className="text-xs font-semibold text-gold">{t(capstone.date)}</p>
-              <h3 className="mt-0.5 font-bold leading-snug">{t(capstone.title)}</h3>
-              <p className="mt-1 text-sm leading-relaxed text-muted text-balance">{nb(t(capstone.org))}</p>
-              {capstone.detail && <p className="mt-0.5 text-xs text-faint">{t(capstone.detail)}</p>}
-            </div>
-          </div>
-        </Card>
+        {/* the other awards, newest first, as smaller cards */}
+        <div className="grid gap-4 sm:grid-cols-2">
+          {others.map((a) => (
+            <Card
+              key={a.org.en}
+              whileHover={{ y: -4 }}
+              transition={{ type: 'spring', stiffness: 320, damping: 24 }}
+              className="award-glow overflow-hidden p-5"
+            >
+              <AwardRing />
+              <div className="absolute inset-0 -z-10 bg-gradient-to-br from-amber-200/30 via-transparent to-transparent dark:from-amber-400/8" />
+              <div className="flex items-start gap-3.5">
+                <span className="grid size-11 shrink-0 place-items-center rounded-full bg-gradient-to-br from-amber-200 via-amber-400 to-amber-600 text-amber-950 shadow-md shadow-amber-500/30">
+                  <Medal className="size-5" />
+                </span>
+                <div className="min-w-0">
+                  <p className="text-xs font-semibold text-gold">{t(a.date)}</p>
+                  <h3 className="mt-0.5 font-bold leading-snug">{t(a.title)}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-muted text-balance">{nb(t(a.org))}</p>
+                  {a.detail && <p className="mt-0.5 text-xs text-faint">{t(a.detail)}</p>}
+                </div>
+              </div>
+            </Card>
+          ))}
+        </div>
       </div>
     </section>
   )
@@ -175,7 +182,7 @@ function Experience() {
       <SectionTitle icon={Briefcase} title={ui.experience} />
       <ol className="relative ml-1.5 space-y-9 border-l border-line pl-7">
         {experience.map((e) => (
-          <li key={e.title.en} className="relative">
+          <li key={`${e.title.en} · ${e.org.en}`} className="relative">
             <span
               aria-hidden
               className="absolute -left-[38px] top-0.5 grid size-[18px] place-items-center rounded-full border border-line bg-surface"
@@ -207,6 +214,16 @@ function Experience() {
               >
                 {nb(t(e.detail))}
               </p>
+            )}
+            {e.bullets && (
+              <ul className="mt-2.5 space-y-2">
+                {e.bullets.map((b) => (
+                  <li key={b.en} className="flex gap-2.5 text-[15px] leading-relaxed text-muted">
+                    <span aria-hidden className="mt-[0.7em] size-1 shrink-0 rounded-full bg-faint" />
+                    <span className="text-pretty">{nb(t(b))}</span>
+                  </li>
+                ))}
+              </ul>
             )}
           </li>
         ))}

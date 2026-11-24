@@ -53,6 +53,8 @@ export type Entry = {
   org: Text
   date: Text
   detail?: Text
+  /** Extra points listed under the detail. */
+  bullets?: Text[]
   /** Opens the organization's site in a new tab. */
   href?: string
 }

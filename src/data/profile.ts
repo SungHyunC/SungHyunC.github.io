@@ -22,17 +22,26 @@ export const profile = {
   resume: '',
 }
 
-/** Verified on the event page / README: $1M total prizes, 2 tracks, 5,367 projects submitted, $25K for 5th (Indie). */
+/**
+ * Verified on the event page / README: $1M total prizes, 2 tracks, 5,367 projects submitted,
+ * $25K for 5th (Indie). The participant count (about 20,000) and the Indie finals (top 5) are
+ * as announced at the finals broadcast on Nov 9, 2026, from the owner's notes.
+ */
 export const metaHighlight = {
   chip: { en: '5th Place · Meta Global AI Hackathon', ko: 'Meta 글로벌 AI 해커톤 5위' } as Text,
   place: { en: '5th Place', ko: '5위 입상' } as Text,
-  track: { en: 'Indie Developer Track', ko: '인디 개발자 트랙' } as Text,
+  track: { en: 'Indie\u00a0Developer\u00a0Track\u00a0· Finalist\u00a0(top\u00a05)', ko: '인디\u00a0개발자\u00a0트랙\u00a0· 결선\u00a0진출\u00a0(상위\u00a05팀)' } as Text,
   href: 'https://cerebralvalley.ai/e/meta-ai-developer-hackathon/hackathon/gallery/2050',
   stats: [
+    { to: 20000, prefix: '~', suffix: '', label: { en: 'participants', ko: '참가자' } as Text },
     { to: 5367, prefix: '', suffix: '', label: { en: 'projects submitted', ko: '전체 출품작' } as Text },
     { to: 1, prefix: '$', suffix: 'M', label: { en: 'total prize pool', ko: '총상금' } as Text },
     { to: 25, prefix: '$', suffix: 'K', label: { en: 'prize won', ko: '수상 상금' } as Text },
   ],
+  source: {
+    en: 'Participants and finalists as announced at the finals broadcast.',
+    ko: '참가자 수와 결선 진출은 결선 방송 발표 기준입니다.',
+  } as Text,
 }
 
 export const awards: Entry[] = [
@@ -41,6 +50,12 @@ export const awards: Entry[] = [
     org: { en: 'Meta Global AI Developer Hackathon', ko: 'Meta 글로벌 AI 개발자 해커톤' },
     date: { en: 'Nov 2026', ko: '2026년 11월' },
     detail: { en: 'Video2URDF, built solo', ko: 'Video2URDF 1인 개발' },
+  },
+  {
+    title: { en: 'Top Award', ko: '최우수상' },
+    org: { en: 'KU\u00a0AI Startup Idea Challenge 2026, Korea University', ko: '2026 고려대학교 KU\u00a0AI 창업 아이디어 챌린지' },
+    date: { en: 'Aug 2026', ko: '2026년 8월' },
+    detail: { en: 'Team entry', ko: '팀 수상' },
   },
   {
     title: { en: 'Excellence Award', ko: '우수상' },
@@ -60,18 +75,57 @@ export const experience: Entry[] = [
     href: 'https://ids-ku.github.io/',
     date: { en: 'Sep 2025 – Present', ko: '2025년 9월 – 현재' },
     detail: {
-      en: 'Multi-agent reinforcement learning for air combat. Ported JSBSim flight dynamics to JAX, cutting per-policy training from about 190 CPU hours to about 20 GPU hours, and reproduced an IEEE ICA 2025 MARL paper over 10 seeds.',
-      ko: '공중전 멀티 에이전트 강화학습을 연구합니다. JSBSim 비행 역학을 JAX로 옮겨 정책당 학습을 약 190 CPU시간에서 약 20 GPU시간으로 줄였고, IEEE ICA 2025 MARL 논문을 시드 10개로 재현했습니다.',
+      en: 'Multi-agent reinforcement learning for air combat and pursuit-evasion.',
+      ko: '공중전과 추격-회피 문제의 멀티\u00a0에이전트 강화학습을 연구합니다.',
     },
+    bullets: [
+      {
+        en: 'Ported JSBSim flight dynamics to JAX, cutting per-policy training from about 190 CPU hours to about 20 GPU hours, and reproduced an IEEE ICA 2025 MARL paper over 10 seeds.',
+        ko: 'JSBSim 비행 역학을 JAX로 옮겨 정책당 학습을 약 190 CPU시간에서 약 20 GPU시간으로 줄였고, IEEE ICA 2025 MARL 논문을 시드 10개로 재현했습니다.',
+      },
+      {
+        en: 'Spring 2026 CURT research: pursuit-evasion MARL with PPO on a bounded grid. Capture rate rose from 33.7% to 99.9% as pursuers were added (5 seeds), and 57.9% of captures came at the border, which covers 39.5% of the grid.',
+        ko: '2026년 1학기 CURT 연구: 유계 격자에서 PPO로 추격-회피 MARL을 학습했습니다. 추격자를 늘리자 포획률이 33.7%에서 99.9%로 올랐고(시드 5개), 포획의 57.9%가 면적의 39.5%인 테두리에서 일어났습니다.',
+      },
+    ],
   },
   {
     title: { en: 'Crimson Silicon Valley SW·AI Leaders Program', ko: '크림슨 실리콘밸리 SW·AI 리더스 프로그램' },
     org: { en: 'Korea University Sejong × CSU East Bay', ko: '고려대학교 세종캠퍼스 × CSU East Bay' },
     date: { en: 'Oct – Nov 2026', ko: '2026년 10–11월' },
     detail: {
-      en: 'Team B: built a traffic-signal digital twin with mobility data and AI.',
-      ko: 'Team B: 모빌리티 데이터와 AI로 교통신호 디지털 트윈을 만들었습니다.',
+      en: 'Led Team B, which built a traffic-signal digital twin with mobility data and AI, and presented it at CSU\u00a0East\u00a0Bay.',
+      ko: 'B팀 팀장으로 모빌리티 데이터와 AI로 교통신호 디지털 트윈을 만들고, CSU\u00a0East\u00a0Bay에서 최종 발표를 했습니다.',
     },
+    bullets: [
+      {
+        en: 'Silicon Valley week (Nov 1–8, 2026): visited Google, Amazon, Databricks and Pensive, with lectures at KIC\u00a0Silicon\u00a0Valley and CSU\u00a0East\u00a0Bay.',
+        ko: '실리콘밸리 연수(2026년 11월 1–8일): Google, Amazon, Databricks, Pensive를 방문하고 KIC\u00a0Silicon\u00a0Valley와 CSU\u00a0East\u00a0Bay 강연을 들었습니다.',
+      },
+    ],
+  },
+  {
+    title: { en: 'Undergraduate Research Assistant', ko: '학부연구생' },
+    org: { en: 'Network Management Lab, Korea University', ko: '고려대학교 네트워크 관리 연구실' },
+    date: { en: 'Dec 2024 – Aug 2025', ko: '2024년 12월 – 2025년 8월' },
+    detail: {
+      en: 'Vision-language models and reinforcement learning for robot arms, advised by Prof. Myung-Sup Kim.',
+      ko: '김명섭 교수님 연구실에서 비전-언어 모델과 로봇팔 강화학습을 공부하고 실험했습니다.',
+    },
+    bullets: [
+      {
+        en: 'Reviewed vision-language and vision-language-action research (CLIP, PaliGemma 2, OpenVLA) and presented paper reviews at lab seminars.',
+        ko: 'CLIP, PaliGemma 2, OpenVLA 등 비전-언어(VLM)·비전-언어-행동(VLA) 모델 논문을 공부하고 연구실 세미나에서 발표했습니다.',
+      },
+      {
+        en: 'Ran OpenVLA on LIBERO simulated robot-manipulation tasks and reviewed its successful and failed rollouts.',
+        ko: 'LIBERO 로봇 조작 시뮬레이션 과제에서 OpenVLA를 실행하고 성공·실패 롤아웃을 분석했습니다.',
+      },
+      {
+        en: 'S-CURT individual research (Apr – Jul 2025): set up Ubuntu, CUDA and NVIDIA Isaac Gym, then trained RL policies for CartPole and Franka Panda cabinet-opening and cube-stacking tasks with a graduate mentor.',
+        ko: 'S-CURT 개인 연구(2025년 4–7월): Ubuntu, CUDA, NVIDIA Isaac Gym 환경을 직접 구성하고, 대학원생 멘토와 함께 CartPole과 Franka Panda 캐비닛 열기·큐브 쌓기 과제의 강화학습 정책을 학습시켰습니다.',
+      },
+    ],
   },
 ]
 
@@ -88,7 +142,7 @@ export type SkillGroup = { id: 'lang' | 'ml' | 'sim' | 'ai' | 'web' | 'tools'; g
 export const skills: SkillGroup[] = [
   { id: 'lang', group: { en: 'Languages', ko: '언어' }, items: ['Python', 'JavaScript', 'Kotlin', 'Swift', 'SQL'] },
   { id: 'ml', group: { en: 'ML & RL', ko: 'ML · 강화학습' }, items: ['PyTorch', 'JAX', 'Ray RLlib', 'scikit-learn', 'QLoRA'] },
-  { id: 'sim', group: { en: 'Simulation', ko: '시뮬레이션' }, items: ['JSBSim', 'MuJoCo', 'SUMO', 'Blender', 'Unreal Engine 5'] },
+  { id: 'sim', group: { en: 'Simulation', ko: '시뮬레이션' }, items: ['JSBSim', 'MuJoCo', 'Isaac Gym', 'SUMO', 'Blender', 'Unreal Engine 5'] },
   { id: 'ai', group: { en: 'AI agents & LLMs', ko: 'AI 에이전트 · LLM' }, items: ['LangGraph', 'Ollama', 'Gemini', 'SAM 3.1'] },
   { id: 'web', group: { en: 'Web & apps', ko: '웹 · 앱' }, items: ['React', 'Next.js', 'Three.js', 'FastAPI', 'Streamlit', 'Android'] },
   { id: 'tools', group: { en: 'Tools', ko: '도구' }, items: ['Git', 'GitHub Actions', 'GitHub Pages', 'Cloudflare'] },
