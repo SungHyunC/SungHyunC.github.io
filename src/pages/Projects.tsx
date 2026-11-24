@@ -10,7 +10,15 @@ import { ProjectArt } from '../components/ProjectArt'
 
 function Thumb({ p }: { p: Project }) {
   const zoom = 'h-full w-full transition-transform duration-700 ease-out group-hover:scale-[1.05]'
-  if (p.image) return <img src={asset(p.image)} alt="" loading="lazy" className={`${zoom} object-cover`} />
+  if (p.image)
+    return (
+      <img
+        src={asset(p.image)}
+        alt=""
+        loading="lazy"
+        className={`${zoom} object-cover ${p.pixelated ? '[image-rendering:pixelated]' : ''}`}
+      />
+    )
   return <div className={zoom}>{p.art && <ProjectArt art={p.art} animate />}</div>
 }
 
@@ -54,7 +62,9 @@ function Links({ p, size = 'sm' }: { p: Project; size?: 'sm' | 'md' }) {
 
 function ProjectCard({ p, onOpen }: { p: Project; onOpen: (id: string) => void }) {
   const { t } = useLang()
-  const wide = !!p.award
+  // Award projects with a photo get the wide card. Drawn art is composed for 16:10 and would be
+  // cropped in the wide card's tall thumbnail, so those keep the normal card (with the gold ring).
+  const wide = !!p.award && !p.art
   return (
     <Card
       layout
@@ -63,7 +73,7 @@ function ProjectCard({ p, onOpen }: { p: Project; onOpen: (id: string) => void }
       exit={{ opacity: 0, scale: 0.96 }}
       transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
       whileHover={{ y: -6 }}
-      className={`card-hover group flex flex-col overflow-hidden ${wide ? 'award-glow lg:col-span-2' : ''}`}
+      className={`card-hover group flex flex-col overflow-hidden ${p.award ? 'award-glow' : ''} ${wide ? 'lg:col-span-2' : ''}`}
     >
       {p.award && <AwardRing />}
       <button

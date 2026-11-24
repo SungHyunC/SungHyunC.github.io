@@ -1,7 +1,7 @@
 /** Every piece of visible text exists in English and Korean. */
 export type Text = { en: string; ko: string }
 
-export type Category = 'rl' | 'agents' | 'ml' | 'apps'
+export type Category = 'rl' | 'agents' | 'ml' | 'apps' | 'games'
 
 export type LinkKind = 'repo' | 'demo' | 'video' | 'pr' | 'page'
 
@@ -22,7 +22,7 @@ export type Award = {
 }
 
 /** Drawn, animated thumbnails for projects without a public screenshot. */
-export type Art = 'orbit' | 'fly' | 'traffic' | 'ev' | 'moa'
+export type Art = 'orbit' | 'fly' | 'traffic' | 'ev' | 'moa' | 'cut' | 'mine' | 'duel'
 
 export type Project = {
   id: string
@@ -40,6 +40,8 @@ export type Project = {
   tech: string[]
   categories: Category[]
   image?: string
+  /** Pixel art: scale the image without smoothing. */
+  pixelated?: boolean
   art?: Art
   links: ProjectLink[]
   award?: Award

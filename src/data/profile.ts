@@ -55,7 +55,7 @@ export const awards: Entry[] = [
     title: { en: 'Top Award', ko: '최우수상' },
     org: { en: 'KU\u00a0AI Startup Idea Challenge 2026, Korea University', ko: '2026 고려대학교 KU\u00a0AI 창업 아이디어 챌린지' },
     date: { en: 'Aug 2026', ko: '2026년 8월' },
-    detail: { en: 'Team entry', ko: '팀 수상' },
+    detail: { en: 'ROADMINE, as team lead', ko: 'ROADMINE · 팀장' },
   },
   {
     title: { en: 'Excellence Award', ko: '우수상' },

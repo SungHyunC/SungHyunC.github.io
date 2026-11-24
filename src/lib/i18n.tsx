@@ -75,8 +75,8 @@ export const ui = {
   copied: { en: 'Copied', ko: '복사됨' },
   projectsTitle: { en: 'Projects', ko: '프로젝트' },
   projectsSub: {
-    en: 'Ten projects across reinforcement learning, simulation, AI agents and apps.',
-    ko: '강화학습, 시뮬레이션, AI 에이전트, 앱에 걸친 프로젝트 10개입니다.',
+    en: 'Research, AI agents, apps and games I have built, from reinforcement learning to Unreal Engine.',
+    ko: '강화학습 연구부터 AI 에이전트, 앱, Unreal Engine 게임까지 직접 만든 것들입니다.',
   },
   links: {
     demo: { en: 'Live demo', ko: '라이브 데모' },

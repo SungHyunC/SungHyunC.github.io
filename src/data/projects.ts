@@ -8,6 +8,7 @@ export const categories: { id: 'all' | Category; label: Text }[] = [
   { id: 'agents', label: { en: 'AI Agents & LLMs', ko: 'AI 에이전트 · LLM' } },
   { id: 'ml', label: { en: 'ML & Vision', ko: 'ML · 비전' } },
   { id: 'apps', label: { en: 'Apps & Web', ko: '앱 · 웹' } },
+  { id: 'games', label: { en: 'Games', ko: '게임' } },
 ]
 
 export const metaAward: Award = {
@@ -26,6 +27,15 @@ export const capstoneAward: Award = {
   title: { en: 'Excellence Award', ko: '우수상' },
   event: { en: 'Industry-Linked Capstone Design Competition', ko: '산학연계 캡스톤디자인 경진대회' },
   date: { en: 'Spring 2026', ko: '2026년 봄' },
+  medal: 'star',
+}
+
+export const kuAiAward: Award = {
+  short: { en: 'Top Award · KU AI Idea Challenge', ko: 'KU AI 창업 챌린지 최우수상' },
+  title: { en: 'Top Award', ko: '최우수상' },
+  event: { en: 'KU AI Startup Idea Challenge 2026, Korea University', ko: '2026 고려대학교 KU AI 창업 아이디어 챌린지' },
+  date: { en: 'Aug 2026', ko: '2026년 8월' },
+  note: { en: 'Team entry, as team lead', ko: '팀장으로 참가' },
   medal: 'star',
 }
 
@@ -77,6 +87,45 @@ export const projects: Project[] = [
     award: metaAward,
   },
   {
+    id: 'roadmine',
+    title: 'ROADMINE',
+    subtitle: { en: 'Edge-case driving data from dashcam video, de-identified and signed', ko: '블랙박스 영상에서 찾은 엣지케이스 주행 데이터, 비식별부터 서명까지' },
+    period: { en: 'Aug 2026', ko: '2026년 8월' },
+    role: { en: 'Team lead', ko: '팀장' },
+    summary: {
+      en: 'Turns real dashcam video into delivery-ready edge-case data: it finds rare driving events, masks faces and plates irreversibly, and ships only what passes rights, privacy and quality gates.',
+      ko: '실제 블랙박스 영상을 납품할 수 있는 엣지케이스 데이터로 바꿉니다. 드문 주행 사건을 찾고, 얼굴과 번호판을 되돌릴 수 없게 가리고, 권리·개인정보·품질 게이트를 통과한 것만 내보냅니다.',
+    },
+    description: {
+      en: 'A working end-to-end system, not a mock-up: one video file in, then real GPU inference, a masked MP4, an OpenSCENARIO file and a hashed, signed delivery package out. The startup idea behind it won the Top Award at the KU AI Startup Idea Challenge 2026.',
+      ko: '데모가 아니라 실제로 도는 시스템입니다. 영상 파일 하나를 넣으면 GPU에서 실제 추론이 돌고, 마스킹된 MP4와 OpenSCENARIO 파일, 해시와 서명이 붙은 납품 패키지가 나옵니다. 이 사업 아이디어로 2026 KU AI 창업 아이디어 챌린지 최우수상을 받았습니다.',
+    },
+    bullets: [
+      {
+        en: 'Masking is irreversible by design: blur is not an option in the code, and audio is never kept; every output is re-checked with ffprobe.',
+        ko: '마스킹은 설계부터 비가역입니다. 코드에 블러 선택지가 아예 없고, 오디오는 남기지 않으며 모든 출력물을 ffprobe로 다시 검사합니다.',
+      },
+      {
+        en: 'Quality control re-scans with different detectors (YOLO11s → YOLOv8s for plates, a second face model) and an OCR pass, and reports its privacy leakage against human labels (6.0%).',
+        ko: 'QC는 1차와 다른 탐지기(번호판 YOLO11s→YOLOv8s, 얼굴은 별도 모델)와 OCR로 다시 검사하고, 사람 라벨 대비 개인정보 누출률(6.0%)을 측정해 밝힙니다.',
+      },
+      {
+        en: 'Three gates with separation of duties: one person cannot sign two gates, the privacy gate needs a full visual check, and the audit log is a hash chain.',
+        ko: '3중 게이트는 직무를 나눕니다. 한 사람이 두 게이트에 서명할 수 없고, 개인정보 게이트는 전 프레임 육안 확인 없이는 통과되지 않으며, 감사 로그는 해시 체인입니다.',
+      },
+    ],
+    metric: {
+      value: { en: '3 gates', ko: '3중 게이트' },
+      label: { en: 'rights, privacy and quality, with separation of duties', ko: '권리·개인정보·품질, 직무 분리' },
+    },
+    tech: ['Python', 'PyTorch', 'YOLO', 'OpenCV', 'FastAPI', 'ffmpeg'],
+    categories: ['ml', 'apps'],
+    art: 'mine',
+    links: [],
+    award: kuAiAward,
+    privateNote: { en: 'Code is private (startup work).', ko: '창업 준비 중인 작업이라 코드는 비공개입니다.' },
+  },
+  {
     id: 'f16',
     title: 'F-16 Air Combat AI Agent',
     subtitle: { en: 'AI Pilot Top Gun Challenge', ko: 'AI 파일럿 탑건 챌린지' },
@@ -116,6 +165,44 @@ export const projects: Project[] = [
       en: 'Code is private: the repository includes the competition environment files.',
       ko: '대회 환경 파일이 들어 있어 코드는 비공개입니다.',
     },
+  },
+  {
+    id: 'maspo-jax',
+    title: 'JAX Air-Combat Simulator',
+    subtitle: { en: 'Reproducing a hierarchical multi-agent RL air-combat paper on GPU', ko: '계층형 다중 에이전트 강화학습 공중전 논문을 GPU에서 재현' },
+    period: { en: 'Sep – Oct 2026', ko: '2026년 9–10월' },
+    role: { en: 'Research, IDS Lab', ko: '연구 · IDS 연구실' },
+    summary: {
+      en: 'Rebuilt the JSBSim air-combat environment in JAX so the IEEE ICA 2025 MA-SPO paper can be retrained about 10× faster on GPU, then reproduced its commander policy over 10 seeds.',
+      ko: 'JSBSim 공중전 환경을 JAX로 다시 만들어 IEEE ICA 2025 MA-SPO 논문을 GPU에서 약 10배 빠르게 다시 학습할 수 있게 하고, 지휘관 정책을 시드 10개로 재현했습니다.',
+    },
+    description: {
+      en: 'A one-month reproduction study of “Coordinated Strategies in Realistic Air Combat by Hierarchical Multi-Agent Reinforcement Learning” (IEEE ICA 2025). The JAX simulator matches JSBSim to about 1e-9 ft and trains 7–10× faster, and policies trained in JAX keep their win rates in JSBSim.',
+      ko: '“Coordinated Strategies in Realistic Air Combat by Hierarchical Multi-Agent Reinforcement Learning”(IEEE ICA 2025)을 한 달 동안 재현했습니다. JAX 시뮬레이터는 JSBSim과 약 1e-9 ft 수준으로 일치하면서 학습은 7–10배 빠르고, JAX에서 학습한 정책은 JSBSim에서도 승률이 유지됩니다.',
+    },
+    bullets: [
+      {
+        en: 'The paper’s results fall inside the reproduced spread: 10-seed JSBSim win rates of 82/87/94% for 3v3/5v5/10v10 (paper: 90/87/83%).',
+        ko: '논문 수치가 재현 결과의 분포 안에 있습니다. 시드 10개 JSBSim 승률은 3대3·5대5·10대10에서 82/87/94%입니다(논문 90/87/83%).',
+      },
+      {
+        en: 'Sim-to-sim check: the same policy’s win rate differs by −0.56 percentage points on average between JAX and JSBSim.',
+        ko: 'sim2sim 검증: 같은 정책의 승률 차이가 JAX와 JSBSim 사이에서 평균 −0.56%p입니다.',
+      },
+      {
+        en: 'Scale: 62 commanders, 1,355 result files and 1,136,240 evaluation battles. Remaining gaps were traced to seed variance and environment rules the paper does not state.',
+        ko: '규모: 지휘관 62개, 결과 파일 1,355개, 평가 전투 1,136,240판. 남은 차이는 시드 편차와 논문에 적히지 않은 환경 규칙에서 왔습니다.',
+      },
+    ],
+    metric: {
+      value: { en: '7–10×', ko: '7–10배' },
+      label: { en: 'faster training than JSBSim, matching it to ~1e-9 ft', ko: 'JSBSim보다 빠른 학습, 오차 약 1e-9 ft' },
+    },
+    tech: ['Python', 'JAX', 'JSBSim', 'Ray RLlib'],
+    categories: ['rl'],
+    art: 'duel',
+    links: [],
+    privateNote: { en: 'Code is private (lab research).', ko: '연구실 연구라 코드는 비공개입니다.' },
   },
   {
     id: 'ma-bems',
@@ -194,6 +281,46 @@ export const projects: Project[] = [
     image: 'projects/multi-agent-bems.webp',
     links: [{ kind: 'repo', label: { en: 'Repository', ko: '저장소' }, href: `${GH}/multi-agent-bems` }],
     award: capstoneAward,
+  },
+  {
+    id: 'ghost-run',
+    title: 'Ghost Run+',
+    subtitle: { en: 'Let your agent’s ghost try it first', ko: '에이전트의 유령이 먼저 해 보게 하세요' },
+    period: { en: 'Nov 2026 –', ko: '2026년 11월 –' },
+    role: { en: 'Kiroween 2026 entry, in progress', ko: 'Kiroween 2026 출품 준비 중' },
+    summary: {
+      en: 'A Kiro template where an AI agent rehearses an irreversible plan in a copy of the world first; guard rules then let it run, ask a human, or block it with the reason.',
+      ko: 'AI 에이전트가 되돌릴 수 없는 계획을 복사한 세계에서 먼저 리허설하는 Kiro 템플릿입니다. 가드 규칙이 결과를 보고 실행시키거나, 사람에게 묻거나, 이유와 함께 막습니다.',
+    },
+    description: {
+      en: 'An entry in the Skeleton Crew category of Kiroween 2026, AWS Kiro’s hackathon: one reusable skeleton (world contract, ghost runner, wards engine, Kiro hooks, an MCP server and a Kiro power) and apps built on it.',
+      ko: 'AWS Kiro 해커톤 Kiroween 2026의 Skeleton Crew 부문 출품작입니다. 재사용할 수 있는 뼈대(세계 계약, 고스트 러너, 가드 엔진, Kiro 훅, MCP 서버, Kiro 파워)와 그 위에 만든 앱들로 이루어집니다.',
+    },
+    bullets: [
+      {
+        en: 'Ghost Shell runs shell and SQL plans against an in-memory project and an in-browser SQLite database before anything real is touched.',
+        ko: 'Ghost Shell은 셸·SQL 계획을 메모리 속 프로젝트와 브라우저 SQLite 데이터베이스에서 먼저 실행합니다.',
+      },
+      {
+        en: 'Ghost Hand lets a browser MuJoCo robot arm try a plan on 8 “haunted” variants before the real arm runs it.',
+        ko: 'Ghost Hand는 브라우저 MuJoCo 로봇팔이 변형 환경 8개에서 계획을 먼저 시험한 뒤에 실제 팔을 움직입니다.',
+      },
+      {
+        en: 'Isolation uses a Docker box with no network; without Docker it falls back to static analysis and asks a human instead of claiming isolation.',
+        ko: '격리는 네트워크 없는 Docker 박스로 하고, Docker가 없으면 정적 분석으로 전환해 격리를 주장하지 않고 사람의 승인을 받습니다.',
+      },
+    ],
+    metric: {
+      value: { en: 'run · ask · block', ko: '실행 · 확인 · 차단' },
+      label: { en: 'verdicts before anything real runs', ko: '실제로 실행하기 전에 내리는 판정' },
+    },
+    tech: ['TypeScript', 'Kiro', 'Docker', 'MCP', 'MuJoCo'],
+    categories: ['agents', 'apps'],
+    image: 'projects/ghost-run.jpg',
+    links: [
+      { kind: 'demo', label: { en: 'Live site', ko: '라이브 사이트' }, href: 'https://ghost-run-plus.pages.dev/' },
+      { kind: 'repo', label: { en: 'Repository', ko: '저장소' }, href: `${GH}/ghost-run` },
+    ],
   },
   {
     id: 'orbitlight',
@@ -359,6 +486,51 @@ export const projects: Project[] = [
     links: [{ kind: 'repo', label: { en: 'Repository', ko: '저장소' }, href: `${GH}/ifev` }],
   },
   {
+    id: 'left-on-the-floor',
+    title: 'LEFT ON THE FLOOR',
+    subtitle: { en: 'Cut anything. What you cut is waiting downstairs.', ko: '뭐든 잘라낼 수 있어요. 잘라낸 건 전부 아래층에서 기다려요.' },
+    period: { en: 'Nov 2026', ko: '2026년 11월' },
+    role: { en: 'Game jam, director and lead (team of 2)', ko: '게임잼 · 감독·리드 (2인 팀)' },
+    summary: {
+      en: 'A first-person 3D puzzle game for the 2026 Epic AI MegaJam (theme “Director’s Cut”): cut objects out of a film set, then cross the editing-room floor below on the pieces you cut.',
+      ko: '2026 Epic AI MegaJam(테마 “Director’s Cut”) 출품작인 1인칭 3D 퍼즐 게임입니다. 영화 세트에서 물건을 잘라 내고, 잘린 조각을 딛고 아래층 편집실 바닥을 건너 출구로 갑니다.',
+    },
+    description: {
+      en: 'Built in Unreal Engine 5 by team runcut, a two-person student team. Anything you cut falls exactly one floor down; a guard who spots you calls “Cut! Take 2!”; the floor below is a negative image with the music reversed; and each of the 10 stages is graded by cuts and takes.',
+      ko: '2인 학생팀 runcut이 Unreal Engine 5로 만들었습니다. 자른 물건은 정확히 한 층 아래로 떨어지고, 경비원에게 들키면 “Cut! Take 2!”로 다시 찍으며, 아래층은 네거티브 화면에 음악이 거꾸로 흐릅니다. 스테이지 10개마다 컷 수와 테이크 수로 등급이 매겨집니다.',
+    },
+    bullets: [
+      {
+        en: 'As director and lead, set the game rules and ran the builds and automated tests; a teammate made the art and levels.',
+        ko: '감독·리드로 게임 규칙을 정하고 빌드와 자동 검증을 맡았고, 팀원이 아트와 레벨을 맡았습니다.',
+      },
+      {
+        en: 'Before submission, 31 regression suites (2,309 checks) passed, and all 10 maps booted and rendered from a fresh install.',
+        ko: '제출 전 회귀 검사 31종(검사 2,309개)을 통과했고, 새로 설치한 빌드에서 맵 10개가 모두 부팅·렌더링됐습니다.',
+      },
+      {
+        en: 'Submitted on itch.io with a trailer and a public devlog; jam results come out in January 2027.',
+        ko: '트레일러와 공개 데브로그와 함께 itch.io에 제출했고, 심사 결과는 2027년 1월에 나옵니다.',
+      },
+    ],
+    metric: {
+      value: { en: '10 stages', ko: '스테이지 10개' },
+      label: { en: 'each graded Director’s, Theatrical or Studio Cut', ko: '스테이지마다 Director’s·Theatrical·Studio Cut 등급' },
+    },
+    tech: ['Unreal Engine 5', 'Python'],
+    categories: ['games'],
+    art: 'cut',
+    links: [
+      { kind: 'page', label: { en: 'itch.io', ko: 'itch.io' }, href: 'https://honeybeelawn.itch.io/left-on-the-floor' },
+      { kind: 'video', label: { en: 'Trailer', ko: '트레일러' }, href: 'https://www.youtube.com/watch?v=-Lr-x_lS7yc' },
+      {
+        kind: 'page',
+        label: { en: 'Devlog', ko: '데브로그' },
+        href: 'https://honeybeelawn.itch.io/left-on-the-floor/devlog/1782038/making-left-on-the-floor-development-log',
+      },
+    ],
+  },
+  {
     id: 'etf-answer-agent',
     title: 'ETF Answer Agent',
     subtitle: { en: 'Traceable answers about Korean ETFs', ko: '근거를 추적할 수 있는 한국 ETF 질의응답' },
@@ -449,6 +621,40 @@ export const projects: Project[] = [
         label: { en: 'PR #29', ko: 'PR #29' },
         href: 'https://github.com/nxtcloud-edu/2026-07-kosj-industry-practice-team04/pull/29',
       },
+    ],
+  },
+  {
+    id: 'unity-games',
+    title: 'Early Unity games',
+    subtitle: { en: 'Small 2D games from 2019, written in C#', ko: '2019년에 C#으로 만든 작은 2D 게임들' },
+    period: { en: '2019', ko: '2019년' },
+    role: { en: 'Early work', ko: '초기 작업' },
+    summary: {
+      en: 'Three Unity projects from 2019. ZG is a pixel-art defense game set in a lab corridor, where you pick the right weapon for each kind of enemy.',
+      ko: '2019년에 만든 Unity 프로젝트 세 개입니다. ZG는 연구소 복도를 배경으로 한 픽셀아트 디펜스 게임으로, 적의 종류에 맞는 무기를 골라 막아 냅니다.',
+    },
+    description: {
+      en: 'Early game projects in Unity and C#. ZG has pixel-art maps, animations and sound; GameFx and BossAttack are smaller experiments.',
+      ko: 'Unity와 C#으로 만든 초기 게임 프로젝트입니다. ZG에는 픽셀아트 맵, 애니메이션, 사운드가 있고, GameFx와 BossAttack은 더 작은 실험작입니다.',
+    },
+    bullets: [
+      {
+        en: 'ZG: A and D to move, J and L to switch between two weapons, with a short news-style intro.',
+        ko: 'ZG: A·D로 이동하고 J·L로 두 무기를 바꿔 쓰며, 뉴스 형식의 짧은 인트로가 있습니다.',
+      },
+    ],
+    metric: {
+      value: { en: '3 games', ko: '게임 3개' },
+      label: { en: 'ZG, GameFx and BossAttack', ko: 'ZG, GameFx, BossAttack' },
+    },
+    tech: ['Unity', 'C#'],
+    categories: ['games'],
+    image: 'projects/unity-zg.png',
+    pixelated: true,
+    links: [
+      { kind: 'repo', label: { en: 'ZG', ko: 'ZG' }, href: `${GH}/ZG` },
+      { kind: 'repo', label: { en: 'GameFx', ko: 'GameFx' }, href: `${GH}/GameFx` },
+      { kind: 'repo', label: { en: 'BossAttack', ko: 'BossAttack' }, href: `${GH}/BossAttack` },
     ],
   },
 ]
